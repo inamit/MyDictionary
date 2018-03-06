@@ -1,0 +1,13 @@
+{
+  "name": "mydictionary",
+  "version": "1.0.0",
+  "description": "My Dictionary Project",
+  "main": "homepage.js",
+  "scripts": {},
+  "author": "Amit Inbar and Nadav",
+  "license": "ISC",
+  "dependencies": {
+    "jquery": "^3.3.1",
+    "popper.js": "^1.12.9"
+  }
+}

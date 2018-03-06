@@ -1,0 +1,36 @@
+[debug] [2018-03-06T19:59:20.421Z] ----------------------------------------------------------------------
+[debug] [2018-03-06T19:59:20.423Z] Command:       /usr/local/Cellar/node/8.7.0/bin/node /usr/local/bin/firebase serve --only hosting
+[debug] [2018-03-06T19:59:20.423Z] CLI Version:   3.15.0
+[debug] [2018-03-06T19:59:20.423Z] Platform:      darwin
+[debug] [2018-03-06T19:59:20.423Z] Node Version:  v8.7.0
+[debug] [2018-03-06T19:59:20.423Z] Time:          Tue Mar 06 2018 21:59:20 GMT+0200 (IST)
+[debug] [2018-03-06T19:59:20.423Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-03-06T19:59:20.438Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-03-06T19:59:20.439Z] > authorizing via signed-in user
+[debug] [2018-03-06T19:59:20.440Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2018-03-06T19:59:20.440Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token { refresh_token: '1/Ha2uqIwQY_TSnnRCK6JXXwC4aALIJ9QxcezhcD1iivc',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Tue Mar 06 2018 21:59:20 GMT+0200 (IST)
+[debug] [2018-03-06T19:59:20.956Z] <<< HTTP RESPONSE 200
+[debug] [2018-03-06T19:59:20.975Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/mydictionary-71b94  
+ Tue Mar 06 2018 21:59:20 GMT+0200 (IST)
+[debug] [2018-03-06T19:59:22.188Z] <<< HTTP RESPONSE 200
+[debug] [2018-03-06T19:59:22.189Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/mydictionary-71b94/tokens  
+ Tue Mar 06 2018 21:59:22 GMT+0200 (IST)
+[debug] [2018-03-06T19:59:23.319Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/amitinbar/Desktop/MyDictionary'...
+[info] 
+[debug] [2018-03-06T19:59:23.324Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/mydictionary-71b94  
+ Tue Mar 06 2018 21:59:23 GMT+0200 (IST)
+[debug] [2018-03-06T19:59:24.523Z] <<< HTTP RESPONSE 200
+[debug] [2018-03-06T19:59:24.524Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/503355081713/clients/_:getWebAppConfig  
+ Tue Mar 06 2018 21:59:24 GMT+0200 (IST)
+[debug] [2018-03-06T19:59:25.443Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: public
+[info] ✔  hosting: Local server: http://localhost:5000
+

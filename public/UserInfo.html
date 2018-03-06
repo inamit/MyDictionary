@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title></title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style type="text/css">
+      .material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
+      .material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
+
+      .material-icons.md-light { color: rgba(255, 255, 255, 1); }
+      .material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
+
+      #loading {
+       width: 100%;
+       height: 100%;
+       top: 0;
+       left: 0;
+       position: fixed;
+       display: block;
+       opacity: 0.7;
+       background-color: #fff;
+       z-index: 2000;
+       text-align: center;
+    }
+
+    #loading-image {
+      position: absolute;
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      top: 50%;
+      left: 50%;
+      z-index: 2001;
+    }
+    </style>
+    <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase-auth.js"></script>
+  </head>
+  <body>
+    <div id="loading">
+      <img id="loading-image" src="Loading.gif" alt="Loading..." />
+    </div>
+    <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+      <a class="navbar-brand" href="index.html">MyDictionary</a>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+        </ul>
+        <i class="my-2 my-lg-0 material-icons md-light" id="searchIcon">search</i>
+        <form class="form-inline my-2 my-lg-0" id="searchField" style="display: none">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="searchText">
+          <button class="btn btn-success my-2 my-sm-0" type="submit" style="display: none" id="submitBtn">Search</button>
+        </form>
+        <!-- <i class="material-icons md-light" onclick="chkForUser()">person</i> -->
+        <button type="button" onclick="SignOut()" class="btn btn-primary">Sign out</button>
+      </div>
+    </nav>
+    <div class="alert alert-danger" id="errorAlert" style="display: none" role="alert">
+      <strong>There is an error!</strong>
+    </div>
+    <br />
+    <br />
+    <br />
+    <center>
+      <img src="profilePic1.png" width="200" height="200" alt="" class="rounded-circle">
+      <br />
+      <br />
+      <h2 id="WelcomeMsg">Hello, </h2>
+    </center>
+
+    <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      $(window).load(function() {
+        $('#loading').hide();
+      });
+      $(document).ready(function() {
+        $("#searchIcon").click(function() {
+          $("#submitBtn").hide(500, function(){
+            $("#searchField").animate({width: 'toggle'}, {complete: function(){$("#submitBtn").toggle(500);}});
+          });
+
+        });
+      });
+    </script>
+    <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyBdfsnBLc6HJZU8SAcJCc1C8W4ZrlSECgE",
+      authDomain: "mydictionary-71b94.firebaseapp.com",
+      databaseURL: "https://mydictionary-71b94.firebaseio.com",
+      projectId: "mydictionary-71b94",
+      storageBucket: "",
+      messagingSenderId: "503355081713"
+    };
+    firebase.initializeApp(config);
+      function getUser() {
+        var user = firebase.auth().currentUser;
+        if (user != null) {
+          var name = user.displayName;
+          console.log("My name is: " + name);
+          var email = user.email;
+          var emailVerified = user.emailVerified;
+          var uid = user.uid;
+          document.getElementById("WelcomeMsg").innerHTML += name;
+        } else {
+          document.getElementById("WelcomeMsg").innerHTML = "";
+        }
+
+      }
+      function SignOut() {
+        firebase.auth().signOut().then(function() {
+          // Signed out
+          window.location = './index.html';
+        }).catch(function(error) {
+          // An error happened.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          // ...
+          var alert = document.getElementById("errorAlert");
+          alert.innerHTML = "<strong>There is an error!</strong> " + errorMessage;
+          alert.style.display = "block";
+          console.log("There is an error with code: " + errorCode + " Message: " + errorMessage);
+        });
+      }
+      window.onload = function() {
+        getUser();
+      }
+    </script>
+  </body>
+</html>
