@@ -39,9 +39,9 @@ function uploadToFirestore() {
       if (verbArr.length > 2) {
         for (var i = 0; i < verbArr.length; i++) {
           if (i % 2 != 0) // Odd cells are translations
-            verbTransUpload += " " + verbArr[i];
+            verbTransUpload += verbArr[i] + ",";
           else
-            verbUpload += " " + verbArr[i];
+            verbUpload += verbArr[i] + ",";
         }
       } else {
         verbUpload = verbArr[0];
@@ -125,10 +125,32 @@ function uploadToFirestore() {
     });
   }
 }
-function addRow(verb, noun, adj, adv, level, verbTrans, nounTrans) {
+// function addRow(verb, noun, adj, adv, level, verbTrans, nounTrans) {
+//   document.getElementById("tableBody").innerHTML += '<tr id="word0"></tr>'; // creates the first row
+//   var row = '<td><div id="verb0" data-toggle="popover" data-original-title="' + verb + ' - ' + verbTrans + " <button type='button' class='close' data-dismiss='popover' aria-label='Close'><span aria-hidden='true'>×</span><span class='sr-only'>Close</span></button>" + '" data-content="Definitions are coming soon!!!" onclick="' + "openPopover('verb0')" + '" data-trigger="focus" style="display: inline-block">' + verb + '</div></td>' +
+//             '<td><div id="noun0" data-toggle="popover" data-original-title="' + noun + ' - ' + nounTrans + " <button type='button' class='close' data-dismiss='popover' aria-label='Close'><span aria-hidden='true'>×</span><span class='sr-only'>Close</span></button>" + '" data-content="Definitions are coming soon!!!" onclick="' + "openPopover('noun0')" + '" data-trigger="focus" style="display: inline-block">' + noun + '</div></td>' +
+//             '<td><div id="adj0" data-toggle="popover">' + adj + '</div></td>' +
+//             '<td><div id="adv0" data-toggle="popover">' + adv + "</div></td>"; // Creates the cells with data
+//   document.getElementById("word" + i).innerHTML = row; // Inserts the row to the view
+//   switch (level) { // Check the knowledge level
+//     case 0:
+//       document.getElementById("word" + i).style.backgroundColor = "#f25337";
+//       break;
+//     case 1:
+//       document.getElementById("word" + i).style.backgroundColor = "#f9e934";
+//       break;
+//     case 2:
+//       document.getElementById("word" + i).style.backgroundColor = "#46ff46";
+//       break;
+//     default:
+//       break;
+//   }
+//   document.getElementById("tableBody").innerHTML += '<tr id="word' + (i+1) + '"></tr>'; // Creates the next row
+//   i++;
+// }
+function addRow(verbRow, nounRow, adj, adv, level) {
   document.getElementById("tableBody").innerHTML += '<tr id="word0"></tr>'; // creates the first row
-  var row = '<td scope="row"><div id="verb0" data-toggle="popover" data-original-title="' + verb + ' - ' + verbTrans + " <button type='button' class='close' data-dismiss='popover' aria-label='Close'><span aria-hidden='true'>×</span><span class='sr-only'>Close</span></button>" + '" data-content="Definitions are coming soon!!!" onclick="' + "openPopover('verb0')" + '" data-trigger="focus" style="display: inline-block">' + verb + '</div></td>' +
-            '<td><div id="noun0" data-toggle="popover" data-original-title="' + noun + ' - ' + nounTrans + " <button type='button' class='close' data-dismiss='popover' aria-label='Close'><span aria-hidden='true'>×</span><span class='sr-only'>Close</span></button>" + '" data-content="Definitions are coming soon!!!" onclick="' + "openPopover('noun0')" + '" data-trigger="focus" style="display: inline-block">' + noun + '</div></td>' +
+  var row = verbRow + nounRow +
             '<td><div id="adj0" data-toggle="popover">' + adj + '</div></td>' +
             '<td><div id="adv0" data-toggle="popover">' + adv + "</div></td>"; // Creates the cells with data
   document.getElementById("word" + i).innerHTML = row; // Inserts the row to the view
@@ -163,29 +185,59 @@ function loadWords() {
                 // Verb
                 var verb = doc.data()["verb"];
                 var verbTrans = doc.data()["verbTrans"];
+                var verbRow = "<td>";
                 if (verb == "") {
                   verb = "-";
+                  verbRow += '<div style="display: inline-block">' + verb + '</div>';
+                } else {
+                  if (verb.indexOf(" ") != -1) {
+                    verb = verb.replace(" ", "");
+                    verb = verb.replace(/ /g, "\n");
+                    verb = verb.split("\n");
+                    verbTrans = verbTrans.split(",");
+                    for (var i = 0; i <= verb.length; i++) {
+                      verbRow += '<div id="verb' + i + '" data-toggle="popover" data-original-title="' + verb[i] + ' - ' + verbTrans[i] + ' <button type="button" onclick="hidePopover(' + "'verb" + i + "')" + '" class="close" ' + "data-dismiss='popover' aria-label='Close'><span aria-hidden='true'>×</span><span class='sr-only'>Close</span></button>" + '" data-content="Definitions are coming soon!!!" onclick="' + "openPopover('verb" + i + "')" + '" data-trigger="focus" style="display: inline-block">' + verb[i] + '</div>';
+                      // verb = verb.replace("\n", '</div><div id="verb' + i + '"  data-toggle="popover" data-original-title="' + verb + ' - ' + verbTrans + " <button type='button' class='close' data-dismiss='popover' aria-label='Close'><span aria-hidden='true'>×</span><span class='sr-only'>Close</span></button>" + '" data-content="Definitions are coming soon!!!" onclick="' + "openPopover('verb" + i + "')" + '" data-trigger="focus" style="display: inline-block">' + verb + '</div>');
+                    }
+                  } else {
+                    verbRow += '<div id="verb0" data-toggle="popover" data-original-title="' + verb + ' - ' + verbTrans + " <button type='button' class='close' data-dismiss='popover' aria-label='Close'><span aria-hidden='true'>×</span><span class='sr-only'>Close</span></button>" + '" data-content="Definitions are coming soon!!!" onclick="' + "openPopover('verb0')" + '" data-trigger="focus" style="display: inline-block">' + verb + '</div>';
+                  }
                 }
-                if (verb.indexOf(" ") != -1) {
-                  verb = verb.replace(" ", "");
-                  verb = verb.replace(/ /g, "\n");
-                }
-                for (var i = 1; i <= verb.split("\n").length; i++) {
-                  verb = verb.replace("\n", '</div><div id="verb' + i + '" data-toggle="popover">');
-                }
+                verbRow += "</td>";
                 // Noun
                 var noun = doc.data()["noun"];
                 var nounTrans = doc.data()["nounTrans"];
+                var nounRow = "<td>";
                 if (noun == "") {
                   noun = "-";
+                  nounRow += '<div style="display: inline-block">' + noun + '</div>';
+                } else {
+                  if (noun.indexOf(" ") != -1) {
+                    noun = noun.replace(" ", "");
+                    noun = noun.replace(/ /g, "\n");
+                    noun = noun.split("\n");
+                    nounTrans = nounTrans.split(",");
+                    for (var i = 0; i <= noun.length; i++) {
+                      nounRow += '<div id="noun' + i + '" data-toggle="popover" data-original-title="' + noun[i] + ' - ' + nounTrans[i] + " <button type='button' class='close' data-dismiss='popover' aria-label='Close'><span aria-hidden='true'>×</span><span class='sr-only'>Close</span></button>" + '" data-content="Definitions are coming soon!!!" onclick="' + "openPopover('noun" + i + "')" + '" data-trigger="focus" style="display: inline-block">' + noun[i] + '</div>';
+                      // noun = noun.replace("\n", '</div><div id="noun' + i + '"  data-toggle="popover" data-original-title="' + noun + ' - ' + nounTrans + " <button type='button' class='close' data-dismiss='popover' aria-label='Close'><span aria-hidden='true'>×</span><span class='sr-only'>Close</span></button>" + '" data-content="Definitions are coming soon!!!" onclick="' + "openPopover('noun" + i + "')" + '" data-trigger="focus" style="display: inline-block">' + noun + '</div>');
+                    }
+                  } else {
+                    nounRow += '<div id="noun0" data-toggle="popover" data-original-title="' + noun + ' - ' + nounTrans + " <button type='button' class='close' data-dismiss='popover' aria-label='Close'><span aria-hidden='true'>×</span><span class='sr-only'>Close</span></button>" + '" data-content="Definitions are coming soon!!!" onclick="' + "openPopover('noun0')" + '" data-trigger="focus" style="display: inline-block">' + noun + '</div>';
+                  }
                 }
                 if (noun.indexOf(" ") != -1) {
                   noun = noun.replace(" ", "");
                   noun = noun.replace(/ /g, "\n");
+                  noun = noun.split("\n");
+                  nounTrans = nounTrans.split(",");
+                  for (var i = 0; i <= noun.length; i++) {
+                    nounRow += '<div id="noun' + i + '" data-toggle="popover" data-original-title="' + noun[i] + ' - ' + nounTrans[i] + " <button type='button' class='close' data-dismiss='popover' aria-label='Close'><span aria-hidden='true'>×</span><span class='sr-only'>Close</span></button>" + '" data-content="Definitions are coming soon!!!" onclick="' + "openPopover('noun" + i + "')" + '" data-trigger="focus" style="display: inline-block">' + noun[i] + '</div>';
+                    // noun = noun.replace("\n", '</div><div id="noun' + i + '"  data-toggle="popover" data-original-title="' + noun + ' - ' + nounTrans + " <button type='button' class='close' data-dismiss='popover' aria-label='Close'><span aria-hidden='true'>×</span><span class='sr-only'>Close</span></button>" + '" data-content="Definitions are coming soon!!!" onclick="' + "openPopover('noun" + i + "')" + '" data-trigger="focus" style="display: inline-block">' + noun + '</div>');
+                  }
+                } else {
+                  nounRow += '<div id="noun0" data-toggle="popover" data-original-title="' + noun + ' - ' + nounTrans + " <button type='button' class='close' data-dismiss='popover' aria-label='Close'><span aria-hidden='true'>×</span><span class='sr-only'>Close</span></button>" + '" data-content="Definitions are coming soon!!!" onclick="' + "openPopover('noun0')" + '" data-trigger="focus" style="display: inline-block">' + noun + '</div>';
                 }
-                for (var i = 1; i <= noun.split("\n").length; i++) {
-                  noun = noun.replace("\n", '</div><div id="noun' + i + '" data-toggle="popover">');
-                }
+                nounRow += "</td>";
                 // Adj
                 var adj = doc.data()["adjective"];
                 if (adj == "") {
@@ -212,7 +264,8 @@ function loadWords() {
                 }
                 // Level
                 var level = doc.data()["known"];
-                addRow(verb, noun, adj, adv, level, verbTrans, nounTrans);
+                // addRow(verb, noun, adj, adv, level, verbTrans, nounTrans);
+                addRow(verbRow, nounRow, adj, adv);
             });
         } else {
           document.getElementById("tableBody").innerHTML += '<tr id="word0"><td scope="row">Enter your first word</td><td></td><td></td><td></td></tr>';
@@ -301,7 +354,7 @@ function openPopover(id) {
     container: document.getElementById(id),
     html: true,
     template: '<div class="popover" role="tooltip"><div class="arrow"></div>'+
-              '<h3 class="popover-header">Popover title</h3><button type="button" class="close" data-dismiss="popover" aria-label="Close"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>' +
+              '<h3 class="popover-header">Popover title</h3>' +
               '<div class="popover-body">' +
               'Popover content</div><img alt="hear" src="./volume.png" /></div>'
   })
@@ -318,4 +371,7 @@ function openPopover(id) {
         $this.popover('hide');
     });
   });
+}
+function hidePopover(id) {
+  $("#" + id).popover("hide");
 }
