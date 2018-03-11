@@ -213,9 +213,12 @@ function loadWords() {
                   nounRow += '<div style="display: inline-block">' + noun + '</div>';
                 } else {
                   if (noun.indexOf(" ") != -1) {
-                    noun = noun.replace(" ", "");
+                    // noun = noun.replace(" ", "");
+                    // console.log("noun removed spaces", "=>", noun);
                     noun = noun.replace(/ /g, "\n");
+                    console.log("noun replaced spaces with enter", "=>", noun);
                     noun = noun.split("\n");
+                    console.log("noun splitted by enter", "=>", noun);
                     nounTrans = nounTrans.split(",");
                     for (var i = 0; i <= noun.length; i++) {
                       nounRow += '<div id="noun' + i + '" data-toggle="popover" data-original-title="' + noun[i] + ' - ' + nounTrans[i] + " <button type='button' class='close' data-dismiss='popover' aria-label='Close'><span aria-hidden='true'>×</span><span class='sr-only'>Close</span></button>" + '" data-content="Definitions are coming soon!!!" onclick="' + "openPopover('noun" + i + "')" + '" data-trigger="focus" style="display: inline-block">' + noun[i] + '</div>';
@@ -224,18 +227,6 @@ function loadWords() {
                   } else {
                     nounRow += '<div id="noun0" data-toggle="popover" data-original-title="' + noun + ' - ' + nounTrans + " <button type='button' class='close' data-dismiss='popover' aria-label='Close'><span aria-hidden='true'>×</span><span class='sr-only'>Close</span></button>" + '" data-content="Definitions are coming soon!!!" onclick="' + "openPopover('noun0')" + '" data-trigger="focus" style="display: inline-block">' + noun + '</div>';
                   }
-                }
-                if (noun.indexOf(" ") != -1) {
-                  noun = noun.replace(" ", "");
-                  noun = noun.replace(/ /g, "\n");
-                  noun = noun.split("\n");
-                  nounTrans = nounTrans.split(",");
-                  for (var i = 0; i <= noun.length; i++) {
-                    nounRow += '<div id="noun' + i + '" data-toggle="popover" data-original-title="' + noun[i] + ' - ' + nounTrans[i] + " <button type='button' class='close' data-dismiss='popover' aria-label='Close'><span aria-hidden='true'>×</span><span class='sr-only'>Close</span></button>" + '" data-content="Definitions are coming soon!!!" onclick="' + "openPopover('noun" + i + "')" + '" data-trigger="focus" style="display: inline-block">' + noun[i] + '</div>';
-                    // noun = noun.replace("\n", '</div><div id="noun' + i + '"  data-toggle="popover" data-original-title="' + noun + ' - ' + nounTrans + " <button type='button' class='close' data-dismiss='popover' aria-label='Close'><span aria-hidden='true'>×</span><span class='sr-only'>Close</span></button>" + '" data-content="Definitions are coming soon!!!" onclick="' + "openPopover('noun" + i + "')" + '" data-trigger="focus" style="display: inline-block">' + noun + '</div>');
-                  }
-                } else {
-                  nounRow += '<div id="noun0" data-toggle="popover" data-original-title="' + noun + ' - ' + nounTrans + " <button type='button' class='close' data-dismiss='popover' aria-label='Close'><span aria-hidden='true'>×</span><span class='sr-only'>Close</span></button>" + '" data-content="Definitions are coming soon!!!" onclick="' + "openPopover('noun0')" + '" data-trigger="focus" style="display: inline-block">' + noun + '</div>';
                 }
                 nounRow += "</td>";
                 // Adj
