@@ -348,10 +348,10 @@ function openPopover(id) {
               '<h3 class="popover-header">Popover title</h3>' +
               '<div class="popover-body">' +
               'Popover content</div><img alt="hear" src="./volume.png" /></div>'
-  })
+  }, 'toggle')
   .on('shown', function() {
     //hide any visible comment-popover
-    $("[rel=comments]").not(this).popover('hide');
+    $("[data-toggle=popover]").not(this).popover('hide');
     var $this = $(this);
     //close on cancel
     $('.popover-cancel').click(function() {
