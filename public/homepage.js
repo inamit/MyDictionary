@@ -202,7 +202,7 @@ function loadWords() {
                       // verb = verb.replace("\n", '</div><div id="verb' + i + '"  data-toggle="popover" data-original-title="' + verb + ' - ' + verbTrans + " <button type='button' class='close' data-dismiss='popover' aria-label='Close'><span aria-hidden='true'>×</span><span class='sr-only'>Close</span></button>" + '" data-content="Definitions are coming soon!!!" onclick="' + "openPopover('verb" + i + "')" + '" data-trigger="focus" style="display: inline-block">' + verb + '</div>');
                     }
                   } else {
-                    verbRow += '<div id="verb0" data-toggle="popover" data-original-title="' + verb + ' - ' + verbTrans + ' <button type="button" onclick="hidePopover(' + "'verb" + i + "')" + '" class="close" aria-label="Close"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>' + '" data-content="Definitions are coming soon!!!" onclick="' + "openPopover('verb0')" + '" style="display: inline-block">' + verb + '</div>';
+                    verbRow += '<div id="verb0" data-toggle="popover" data-original-title="' + verb + ' - ' + verbTrans + " <button type='button' class='close' data-dismiss='popover' aria-label='Close'><span aria-hidden='true'>×</span><span class='sr-only'>Close</span></button>" + '" data-content="Definitions are coming soon!!!" onclick="' + "openPopover('verb0')" + '" style="display: inline-block">' + verb + '</div>';
                   }
                 }
                 verbRow += "</td>";
@@ -225,11 +225,11 @@ function loadWords() {
                       noun.shift();
                     console.log("noun splitted by enter", "=>", noun);
                     for (var i = 0; i < noun.length; i++) {
-                      nounRow += '<div id="noun' + i + '" data-toggle="popover" data-original-title="' + noun[i] + ' - ' + nounTrans[i] + ' <button type="button" onclick="hidePopover(' + "'verb" + i + "')" + '" class="close" aria-label="Close"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>' + '" data-content="Definitions are coming soon!!!" onclick="' + "openPopover('noun" + i + "')" + '" style="display: inline-block">' + noun[i] + '</div><br />';
+                      nounRow += '<div id="noun' + i + '" data-toggle="popover" data-original-title="' + noun[i] + ' - ' + nounTrans[i] + " <button type='button' class='close' data-dismiss='popover' aria-label='Close'><span aria-hidden='true'>×</span><span class='sr-only'>Close</span></button>" + '" data-content="Definitions are coming soon!!!" onclick="' + "openPopover('noun" + i + "')" + '" style="display: inline-block">' + noun[i] + '</div><br />';
                       // noun = noun.replace("\n", '</div><div id="noun' + i + '"  data-toggle="popover" data-original-title="' + noun + ' - ' + nounTrans + " <button type='button' class='close' data-dismiss='popover' aria-label='Close'><span aria-hidden='true'>×</span><span class='sr-only'>Close</span></button>" + '" data-content="Definitions are coming soon!!!" onclick="' + "openPopover('noun" + i + "')" + '" data-trigger="focus" style="display: inline-block">' + noun + '</div>');
                     }
                   } else {
-                    nounRow += '<div id="noun0" data-toggle="popover" data-original-title="' + noun + ' - ' + nounTrans + ' <button type="button" onclick="hidePopover(' + "'verb" + i + "')" + '" class="close" aria-label="Close"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>' + '" data-content="Definitions are coming soon!!!" onclick="' + "openPopover('noun0')" + '" data-trigger="focus" style="display: inline-block">' + noun + '</div>';
+                    nounRow += '<div id="noun0" data-toggle="popover" data-original-title="' + noun + ' - ' + nounTrans + " <button type='button' class='close' data-dismiss='popover' aria-label='Close'><span aria-hidden='true'>×</span><span class='sr-only'>Close</span></button>" + '" data-content="Definitions are coming soon!!!" onclick="' + "openPopover('noun0')" + '" style="display: inline-block">' + noun + '</div>';
                   }
                 }
                 nounRow += "</td>";
