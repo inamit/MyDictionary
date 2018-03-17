@@ -344,7 +344,6 @@ function chkForUser() {
 }
 function openPopover(id) {
   $("#"+id).popover({
-    trigger : 'click',
     placement : 'right',
     container: document.getElementById(id),
     html: true,
@@ -352,8 +351,8 @@ function openPopover(id) {
               '<h3 class="popover-header">Popover title</h3>' +
               '<div class="popover-body">' +
               'Popover content</div><img alt="hear" src="./volume.png" /></div>'
-  }, 'toggle')
-  .on('shown', function() {
+  })
+  .on('shown.bs.popover', function() {
     //hide any visible comment-popover
     $("[data-toggle=popover]").not(this).popover('hide');
     var $this = $(this);
