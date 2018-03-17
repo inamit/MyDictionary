@@ -195,8 +195,12 @@ function loadWords() {
                     verb = verb.replace(/ /g, "\n");
                     verb = verb.split("\n");
                     verbTrans = verbTrans.split(",");
+                    for (var i = 0; i < verb.length; i++) {
+                      if (verb[i] == "")
+                        verb.shift();
+                    }
                     for (var i = 0; i <= verb.length; i++) {
-                      verbRow += '<div id="verb' + i + '" data-toggle="popover" data-original-title="' + verb[i] + ' - ' + verbTrans[i] + ' <button type="button" onclick="hidePopover(' + "'verb" + i + "')" + '" class="close" ' + "data-dismiss='popover' aria-label='Close'><span aria-hidden='true'>×</span><span class='sr-only'>Close</span></button>" + '" data-content="Definitions are coming soon!!!" onclick="' + "openPopover('verb" + i + "')" + '" data-trigger="focus" style="display: inline-block">' + verb[i] + '</div>';
+                      verbRow += '<div id="verb' + i + '" data-toggle="popover" data-original-title="' + verb[i] + ' - ' + verbTrans[i] + ' <button type="button" onclick="hidePopover(' + "'verb" + i + "')" + '" class="close" ' + "data-dismiss='popover' aria-label='Close'><span aria-hidden='true'>×</span><span class='sr-only'>Close</span></button>" + '" data-content="Definitions are coming soon!!!" onclick="' + "openPopover('verb" + i + "')" + '" data-trigger="focus" style="display: inline-block">' + verb[i] + '</div><br />';
                       // verb = verb.replace("\n", '</div><div id="verb' + i + '"  data-toggle="popover" data-original-title="' + verb + ' - ' + verbTrans + " <button type='button' class='close' data-dismiss='popover' aria-label='Close'><span aria-hidden='true'>×</span><span class='sr-only'>Close</span></button>" + '" data-content="Definitions are coming soon!!!" onclick="' + "openPopover('verb" + i + "')" + '" data-trigger="focus" style="display: inline-block">' + verb + '</div>');
                     }
                   } else {
@@ -218,8 +222,12 @@ function loadWords() {
                     noun = noun.replace(/ /g, "\n");
                     console.log("noun replaced spaces with enter", "=>", noun);
                     noun = noun.split("\n");
-                    console.log("noun splitted by enter", "=>", noun);
                     nounTrans = nounTrans.split(",");
+                    for (var i = 0; i < noun.length; i++) {
+                      if (noun[i] == "")
+                        noun.shift();
+                    }
+                    console.log("noun splitted by enter", "=>", noun);
                     for (var i = 0; i <= noun.length; i++) {
                       nounRow += '<div id="noun' + i + '" data-toggle="popover" data-original-title="' + noun[i] + ' - ' + nounTrans[i] + " <button type='button' class='close' data-dismiss='popover' aria-label='Close'><span aria-hidden='true'>×</span><span class='sr-only'>Close</span></button>" + '" data-content="Definitions are coming soon!!!" onclick="' + "openPopover('noun" + i + "')" + '" data-trigger="focus" style="display: inline-block">' + noun[i] + '</div>';
                       // noun = noun.replace("\n", '</div><div id="noun' + i + '"  data-toggle="popover" data-original-title="' + noun + ' - ' + nounTrans + " <button type='button' class='close' data-dismiss='popover' aria-label='Close'><span aria-hidden='true'>×</span><span class='sr-only'>Close</span></button>" + '" data-content="Definitions are coming soon!!!" onclick="' + "openPopover('noun" + i + "')" + '" data-trigger="focus" style="display: inline-block">' + noun + '</div>');
