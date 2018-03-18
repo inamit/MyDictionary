@@ -225,7 +225,7 @@ function loadWords() {
                       noun.shift();
                     console.log("noun splitted by enter", "=>", noun);
                     for (var j = 0; i < noun.length; j++) {
-                      nounRow += '<div id="noun' + i + '' + j '" data-toggle="popover" data-original-title="' + noun[i] + ' - ' + nounTrans[i] + " <button type='button' class='close' data-dismiss='popover' aria-label='Close'><span aria-hidden='true'>×</span><span class='sr-only'>Close</span></button>" + '" data-content="Definitions are coming soon!!!" onclick="openPopover()" style="display: inline-block">' + noun[i] + '</div><br />';
+                      nounRow += '<div id="noun' + i.ToString() + j.ToString() + '" data-toggle="popover" data-original-title="' + noun[i] + ' - ' + nounTrans[i] + " <button type='button' class='close' data-dismiss='popover' aria-label='Close'><span aria-hidden='true'>×</span><span class='sr-only'>Close</span></button>" + '" data-content="Definitions are coming soon!!!" onclick="openPopover()" style="display: inline-block">' + noun[i] + '</div><br />';
                       // noun = noun.replace("\n", '</div><div id="noun' + i + '"  data-toggle="popover" data-original-title="' + noun + ' - ' + nounTrans + " <button type='button' class='close' data-dismiss='popover' aria-label='Close'><span aria-hidden='true'>×</span><span class='sr-only'>Close</span></button>" + '" data-content="Definitions are coming soon!!!" onclick="' + "openPopover('noun" + i + "')" + '" data-trigger="focus" style="display: inline-block">' + noun + '</div>');
                     }
                   } else {
@@ -260,7 +260,7 @@ function loadWords() {
                 // Level
                 var level = doc.data()["known"];
                 // addRow(verb, noun, adj, adv, level, verbTrans, nounTrans);
-                addRow(verbRow, nounRow, adj, adv);
+                addRow(verbRow, nounRow, adj, adv, level);
             });
         } else {
           document.getElementById("tableBody").innerHTML += '<tr id="word0"><td scope="row">Enter your first word</td><td></td><td></td><td></td></tr>';
