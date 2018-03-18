@@ -225,7 +225,7 @@ function loadWords() {
                       noun.shift();
                     console.log("noun splitted by enter", "=>", noun);
                     for (var i = 0; i < noun.length; i++) {
-                      nounRow += '<div id="noun' + i + '" data-toggle="popover" data-original-title="' + noun[i] + ' - ' + nounTrans[i] + " <button type='button' class='close' data-dismiss='popover' aria-label='Close'><span aria-hidden='true'>×</span><span class='sr-only'>Close</span></button>" + '" data-content="Definitions are coming soon!!!" onclick="' + "openPopover('noun" + i + "')" + '" style="display: inline-block">' + noun[i] + '</div><br />';
+                      nounRow += '<div id="noun' + i + '" data-toggle="popover" data-original-title="' + noun[i] + ' - ' + nounTrans[i] + " <button type='button' class='close' data-dismiss='popover' aria-label='Close'><span aria-hidden='true'>×</span><span class='sr-only'>Close</span></button>" + '" data-content="Definitions are coming soon!!!" onclick="' + "openPopover($this)" + '" style="display: inline-block">' + noun[i] + '</div><br />';
                       // noun = noun.replace("\n", '</div><div id="noun' + i + '"  data-toggle="popover" data-original-title="' + noun + ' - ' + nounTrans + " <button type='button' class='close' data-dismiss='popover' aria-label='Close'><span aria-hidden='true'>×</span><span class='sr-only'>Close</span></button>" + '" data-content="Definitions are coming soon!!!" onclick="' + "openPopover('noun" + i + "')" + '" data-trigger="focus" style="display: inline-block">' + noun + '</div>');
                     }
                   } else {
@@ -342,8 +342,33 @@ function chkForUser() {
     window.location = './Login.html';
   }
 }
-function openPopover(id) {
-  $("#"+id).popover({
+// function openPopover(id) {
+//   $("#"+id).popover({
+//     trigger: "click",
+//     placement : 'right',
+//     container: document.getElementById(id),
+//     html: true,
+//     template: '<div class="popover" role="tooltip"><div class="arrow"></div>'+
+//               '<h3 class="popover-header">Popover title</h3>' +
+//               '<div class="popover-body">' +
+//               'Popover content</div><img alt="hear" src="./volume.png" /></div>'
+//   })
+//   .on('show.bs.popover', function() {
+//     //hide any visible comment-popover
+//     $("[data-toggle=popover]").not(this).popover('hide');
+//     var $this = $(this);
+//     //close on cancel
+//     $('.popover-cancel').click(function() {
+//         $this.popover('hide');
+//     });
+//     //update link text on submit
+//     $('.popover-submit').click(function() {
+//         $this.popover('hide');
+//     });
+//   });
+// }
+function openPopover(obj) {
+  $(obj).popover({
     trigger: "click",
     placement : 'right',
     container: document.getElementById(id),
