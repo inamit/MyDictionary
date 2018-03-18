@@ -368,7 +368,8 @@ function chkForUser() {
 //   });
 // }
 function openPopover(event) {
-  $(event.target).popover({
+  var objID = $(event.target).attr('id');
+  (event.target).popover({
     trigger: "click",
     placement : 'right',
     container: document.getElementById(id),
