@@ -20,8 +20,8 @@ function handleWord(word) {
   while (word.indexOf(" ") != -1) // checks for spaces
     word = word.replace(" ", ""); // delete spaces
   word = word.split(/\n/); // split the two lines
-  for (var i = 0; i < word.length; i++) {
-    var arr = word[i].split(','); // split each line by ,
+  for (var k = 0; k < word.length; k++) {
+    var arr = word[k].split(','); // split each line by ,
     for (var j = 0; j < arr.length; j++)
       uploadWordArr.push(arr[j]); // put the value into the new array
   }
@@ -37,11 +37,11 @@ function uploadToFirestore() {
     if (verb != "") {
       var verbArr = handleWord(verb);
       if (verbArr.length > 2) {
-        for (var i = 0; i < verbArr.length; i++) {
-          if (i % 2 != 0) // Odd cells are translations
-            verbTransUpload += verbArr[i] + ",";
+        for (var j = 0; j < verbArr.length; j++) {
+          if (j % 2 != 0) // Odd cells are translations
+            verbTransUpload += verbArr[j] + ",";
           else
-            verbUpload += verbArr[i] + ",";
+            verbUpload += verbArr[j] + ",";
         }
       } else {
         verbUpload = verbArr[0];
@@ -54,11 +54,11 @@ function uploadToFirestore() {
     if (adj != "") {
       var adjArr = handleWord(adj);
       if (adjArr.length > 2) {
-        for (var i = 0; i < adjArr.length; i++) {
-          if (i % 2 != 0)
-            adjTransUpload += " " + adjArr[i];
+        for (var j = 0; j < adjArr.length; j++) {
+          if (j % 2 != 0)
+            adjTransUpload += " " + adjArr[j];
           else
-            adjUpload += " " + adjArr[i];
+            adjUpload += " " + adjArr[j];
         }
       } else {
         adjUpload = adjArr[0];
@@ -71,11 +71,11 @@ function uploadToFirestore() {
     if (adv != "") {
       var advArr = handleWord(adv);
       if (advArr.length > 2) {
-        for (var i = 0; i < advArr.length; i++) {
-          if (i % 2 != 0)
-            advTransUpload += " " + advArr[i];
+        for (var j = 0; j < advArr.length; j++) {
+          if (j % 2 != 0)
+            advTransUpload += " " + advArr[j];
           else
-            advUpload += " " + advArr[i];
+            advUpload += " " + advArr[j];
         }
       } else {
         advUpload = advArr[0];
@@ -88,11 +88,11 @@ function uploadToFirestore() {
     if (noun != "") {
       var nounArr = handleWord(noun);
       if (nounArr.length > 2) {
-        for (var i = 0; i < nounArr.length; i++) {
-          if (i % 2 != 0)
-            nounTransUpload += " " + nounArr[i];
+        for (var j = 0; j < nounArr.length; j++) {
+          if (j % 2 != 0)
+            nounTransUpload += " " + nounArr[j];
           else
-            nounUpload += " " + nounArr[i];
+            nounUpload += " " + nounArr[j];
         }
       } else {
         nounUpload = nounArr[0];
@@ -197,7 +197,7 @@ function loadWords() {
                     verbTrans = verbTrans.split(",");
                     if (verb[0] == "")
                       verb.shift();
-                    for (var i = 0; i < verb.length; i++) {
+                    for (var j = 0; j < verb.length; j++) {
                       verbRow += '<div id="verb' + i + '" data-toggle="popover" data-original-title="' + verb[i] + ' - ' + verbTrans[i] + ' <button type="button" onclick="hidePopover(' + "'verb" + i + "')" + '" class="close" ' + " aria-label='Close'><span aria-hidden='true'>×</span><span class='sr-only'>Close</span></button>" + '" data-content="Definitions are coming soon!!!" onclick="' + "openPopover('verb" + i + "')" + '" style="display: inline-block">' + verb[i] + '</div><br />';
                       // verb = verb.replace("\n", '</div><div id="verb' + i + '"  data-toggle="popover" data-original-title="' + verb + ' - ' + verbTrans + " <button type='button' class='close' data-dismiss='popover' aria-label='Close'><span aria-hidden='true'>×</span><span class='sr-only'>Close</span></button>" + '" data-content="Definitions are coming soon!!!" onclick="' + "openPopover('verb" + i + "')" + '" data-trigger="focus" style="display: inline-block">' + verb + '</div>');
                     }
@@ -224,8 +224,8 @@ function loadWords() {
                     if (noun[0] == "")
                       noun.shift();
                     console.log("noun splitted by enter", "=>", noun);
-                    for (var i = 0; i < noun.length; i++) {
-                      nounRow += '<div id="noun' + i + '" data-toggle="popover" data-original-title="' + noun[i] + ' - ' + nounTrans[i] + " <button type='button' class='close' data-dismiss='popover' aria-label='Close'><span aria-hidden='true'>×</span><span class='sr-only'>Close</span></button>" + '" data-content="Definitions are coming soon!!!" onclick="openPopover()" style="display: inline-block">' + noun[i] + '</div><br />';
+                    for (var j = 0; i < noun.length; j++) {
+                      nounRow += '<div id="noun' + i + '' + j '" data-toggle="popover" data-original-title="' + noun[i] + ' - ' + nounTrans[i] + " <button type='button' class='close' data-dismiss='popover' aria-label='Close'><span aria-hidden='true'>×</span><span class='sr-only'>Close</span></button>" + '" data-content="Definitions are coming soon!!!" onclick="openPopover()" style="display: inline-block">' + noun[i] + '</div><br />';
                       // noun = noun.replace("\n", '</div><div id="noun' + i + '"  data-toggle="popover" data-original-title="' + noun + ' - ' + nounTrans + " <button type='button' class='close' data-dismiss='popover' aria-label='Close'><span aria-hidden='true'>×</span><span class='sr-only'>Close</span></button>" + '" data-content="Definitions are coming soon!!!" onclick="' + "openPopover('noun" + i + "')" + '" data-trigger="focus" style="display: inline-block">' + noun + '</div>');
                     }
                   } else {
@@ -242,7 +242,7 @@ function loadWords() {
                   adj = adj.replace(" ", "");
                   adj = adj.replace(/ /g, "\n");
                 }
-                for (var i = 1; i <= adj.split("\n").length; i++) {
+                for (var j = 1; j <= adj.split("\n").length; j++) {
                   adj = adj.replace("\n", '</div><div id="adj' + i + '" data-toggle="popover">');
                 }
                 // Adv
@@ -254,7 +254,7 @@ function loadWords() {
                   adv = adv.replace(" ", "");
                   adv = adv.replace(/ /g, "\n");
                 }
-                for (var i = 1; i <= adv.split("\n").length; i++) {
+                for (var j = 1; j <= adv.split("\n").length; j++) {
                   adv = adv.replace("\n", '</div><div id="adv' + i + '" data-toggle="popover">');
                 }
                 // Level
